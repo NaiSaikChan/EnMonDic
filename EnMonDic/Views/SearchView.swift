@@ -6,18 +6,29 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct SearchView: View {
     @State private var searchText: String = ""
     @FocusState private var isSearching: Bool
     @State private var activeTab: Tab = .all
+    @State private var words: [MonDic] = []
     @Environment(\.colorScheme) private var scheme
+    @Environment(\.managedObjectContext) private var viewContext
     @Namespace private var animation
     
     var body: some View {
         ScrollView(.vertical) {
             LazyVStack(spacing: 15) {
-                DummyMessagesView()
+                ContentView()
+            }
+            .onChange(of: searchText) {
+                fetchDataInBackground(query: searchText) { fetchedWords in
+                    self.words = fetchedWords // Update the state variable on the main thread
+                }
+            }
+            .onAppear {
+                loadDataIfNeeded(context: viewContext)
             }
             .safeAreaPadding(15)
             .safeAreaInset(edge: .top, spacing: 0) {
@@ -32,7 +43,7 @@ struct SearchView: View {
     
     /// Expandable Navigation Bar
     @ViewBuilder
-    func ExpandableNavigationBar(_ title: String = "Messages") -> some View {
+    func ExpandableNavigationBar(_ title: String = "Dictionary") -> some View {
         GeometryReader { proxy in
             let minY = proxy.frame(in: .scrollView(axis: .vertical)).minY
             let scrollviewHeight = proxy.bounds(of: .scrollView(axis: .vertical))?.height ?? 0
@@ -121,21 +132,60 @@ struct SearchView: View {
     /// Dummy Messages View
     @ViewBuilder
     func DummyMessagesView() -> some View {
-        ForEach(0..<20, id: \.self) { _ in
-            HStack(spacing: 12) {
-                Circle()
-                    .frame(width: 55, height: 55)
+            ForEach(words) { item in
+                HStack(spacing: 12) {
                 VStack(alignment: .leading, spacing: 6, content: {
-                    Rectangle()
-                        .frame(width: 140, height: 8)
-                    Rectangle()
-                        .frame(height: 8)
-                    Rectangle()
-                        .frame(width: 80, height: 8)
+                    Text(highlightedText(for: item.english ?? ""))
+                        .font(.headline)
+                        .frame(width: 140, height: 25)
+                    Text(highlightedText(for: item.mon ?? ""))
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .frame(width: .infinity, height: .infinity)
                 })
             }
             .foregroundStyle(.gray.opacity(0.25))
             .padding(.horizontal, 15)
+        }
+    }
+    
+    // Function to highlight the search term within the text
+    private func highlightedText(for text: String) -> AttributedString {
+        var attributedString = AttributedString(text)
+        
+        if let range = attributedString.range(of: searchText, options: [.caseInsensitive, .diacriticInsensitive]) {
+            attributedString[range].foregroundColor = .blue // Highlight color
+            attributedString[range].font = .bold(.body)() // Optional: Make it bold
+        }
+        
+        return attributedString
+    }
+    
+    // Fetch data in the background using a background context with whole-word matching
+    private func fetchDataInBackground(query: String, completion: @escaping ([MonDic]) -> Void) {
+        let context = PersistenceController.shared.container.newBackgroundContext()
+        context.perform {
+            let fetchRequest: NSFetchRequest<MonDic> = MonDic.fetchRequest()
+            fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \MonDic.english, ascending: true)]
+            
+            if !query.isEmpty {
+                // Whole-word matching with exact match
+                fetchRequest.predicate = NSPredicate(format: "english CONTAINS[cd] %@ OR mon == [cd] %@", query, query)
+            }
+            
+            fetchRequest.fetchBatchSize = 20 // Adjust batch size to balance performance
+            
+            do {
+                let results = try context.fetch(fetchRequest)
+                DispatchQueue.main.async {
+                    completion(results)
+                }
+            } catch {
+                print("Failed to fetch data: \(error)")
+                DispatchQueue.main.async {
+                    completion([])
+                }
+            }
         }
     }
 }

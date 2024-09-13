@@ -12,21 +12,31 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \MonDic.english, ascending: true)],
         animation: .default)
-    private var items: FetchedResults<Item>
+    private var items: FetchedResults<MonDic>
 
     var body: some View {
         NavigationView {
             List {
                 ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
+                    NavigationLink(destination: DetailView(word: item)) {
+                        VStack(alignment: .leading){
+                            Text(item.english ?? "")
+                                .font(.custom("Mon3Anonta1", size: 20))
+                                .fontWeight(.bold)
+                            Text(item.mon ?? "")
+                                .font(.custom("Pyidaungsu", size: 16))
+                                .foregroundStyle(.secondary)
+                                .lineLimit(3)
+                        }
+                        .padding(.horizontal, 5)
                     }
                 }
                 .onDelete(perform: deleteItems)
+            }
+            .onAppear {
+                loadDataIfNeeded(context: viewContext)
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -38,14 +48,13 @@ struct ContentView: View {
                     }
                 }
             }
-            Text("Select an item")
         }
     }
 
     private func addItem() {
         withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+            let newItem = MonDic(context: viewContext)
+            newItem.english = "love"
 
             do {
                 try viewContext.save()

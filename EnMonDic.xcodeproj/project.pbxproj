@@ -21,6 +21,7 @@
 		7159385E2C941F9900FC9929 /* DataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7159385D2C941F9900FC9929 /* DataLoader.swift */; };
 		715938602C94236D00FC9929 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7159385F2C94236D00FC9929 /* SearchView.swift */; };
 		715938622C942BF300FC9929 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715938612C942BF300FC9929 /* Tab.swift */; };
+		719B8F492C949FF20080CEBB /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719B8F482C949FF20080CEBB /* DetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,8 @@
 		7159385D2C941F9900FC9929 /* DataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoader.swift; sourceTree = "<group>"; };
 		7159385F2C94236D00FC9929 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		715938612C942BF300FC9929 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		719B8F482C949FF20080CEBB /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		719B8F4A2C94A2E30080CEBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +74,7 @@
 		7159383B2C940ECC00FC9929 /* EnMonDic */ = {
 			isa = PBXGroup;
 			children = (
+				719B8F4A2C94A2E30080CEBB /* Info.plist */,
 				7159383C2C940ECC00FC9929 /* EnMonDicApp.swift */,
 				715938512C94137100FC9929 /* Helper */,
 				715938502C94136400FC9929 /* Views */,
@@ -105,6 +109,7 @@
 			children = (
 				7159383E2C940ECC00FC9929 /* ContentView.swift */,
 				7159385F2C94236D00FC9929 /* SearchView.swift */,
+				719B8F482C949FF20080CEBB /* DetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -205,6 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7159385E2C941F9900FC9929 /* DataLoader.swift in Sources */,
+				719B8F492C949FF20080CEBB /* DetailView.swift in Sources */,
 				715938462C940ECD00FC9929 /* Persistence.swift in Sources */,
 				7159383F2C940ECC00FC9929 /* ContentView.swift in Sources */,
 				715938492C940ECD00FC9929 /* EnMonDic.xcdatamodeld in Sources */,
@@ -347,6 +353,7 @@
 				DEVELOPMENT_TEAM = 86SZC8RRQ7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EnMonDic/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -376,6 +383,7 @@
 				DEVELOPMENT_TEAM = 86SZC8RRQ7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EnMonDic/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
