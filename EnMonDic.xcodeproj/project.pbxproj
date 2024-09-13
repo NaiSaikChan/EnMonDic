@@ -13,6 +13,11 @@
 		715938442C940ECD00FC9929 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 715938432C940ECD00FC9929 /* Preview Assets.xcassets */; };
 		715938462C940ECD00FC9929 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715938452C940ECD00FC9929 /* Persistence.swift */; };
 		715938492C940ECD00FC9929 /* EnMonDic.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 715938472C940ECD00FC9929 /* EnMonDic.xcdatamodeld */; };
+		715938572C9413EF00FC9929 /* Mon3Anonta1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 715938522C9413EF00FC9929 /* Mon3Anonta1.ttf */; };
+		715938582C9413EF00FC9929 /* MUA_Office_adobe.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 715938532C9413EF00FC9929 /* MUA_Office_adobe.ttf */; };
+		715938592C9413EF00FC9929 /* Pyidaungsu-1.7_Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 715938542C9413EF00FC9929 /* Pyidaungsu-1.7_Bold.ttf */; };
+		7159385A2C9413EF00FC9929 /* Pyidaungsu-1.7_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 715938552C9413EF00FC9929 /* Pyidaungsu-1.7_Regular.ttf */; };
+		7159385C2C94142E00FC9929 /* dictionary.json in Resources */ = {isa = PBXBuildFile; fileRef = 7159385B2C94142E00FC9929 /* dictionary.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +28,11 @@
 		715938432C940ECD00FC9929 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		715938452C940ECD00FC9929 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		715938482C940ECD00FC9929 /* EnMonDic.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EnMonDic.xcdatamodel; sourceTree = "<group>"; };
+		715938522C9413EF00FC9929 /* Mon3Anonta1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Mon3Anonta1.ttf; sourceTree = "<group>"; };
+		715938532C9413EF00FC9929 /* MUA_Office_adobe.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MUA_Office_adobe.ttf; sourceTree = "<group>"; };
+		715938542C9413EF00FC9929 /* Pyidaungsu-1.7_Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pyidaungsu-1.7_Bold.ttf"; sourceTree = "<group>"; };
+		715938552C9413EF00FC9929 /* Pyidaungsu-1.7_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pyidaungsu-1.7_Regular.ttf"; sourceTree = "<group>"; };
+		7159385B2C94142E00FC9929 /* dictionary.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dictionary.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,10 +66,10 @@
 			isa = PBXGroup;
 			children = (
 				7159383C2C940ECC00FC9929 /* EnMonDicApp.swift */,
-				7159383E2C940ECC00FC9929 /* ContentView.swift */,
+				715938512C94137100FC9929 /* Helper */,
+				715938502C94136400FC9929 /* Views */,
+				7159384F2C94135500FC9929 /* DataModel */,
 				715938402C940ECD00FC9929 /* Assets.xcassets */,
-				715938452C940ECD00FC9929 /* Persistence.swift */,
-				715938472C940ECD00FC9929 /* EnMonDic.xcdatamodeld */,
 				715938422C940ECD00FC9929 /* Preview Content */,
 			);
 			path = EnMonDic;
@@ -71,6 +81,43 @@
 				715938432C940ECD00FC9929 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		7159384F2C94135500FC9929 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				715938452C940ECD00FC9929 /* Persistence.swift */,
+				715938472C940ECD00FC9929 /* EnMonDic.xcdatamodeld */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
+		715938502C94136400FC9929 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7159383E2C940ECC00FC9929 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		715938512C94137100FC9929 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				7159385B2C94142E00FC9929 /* dictionary.json */,
+				715938562C9413EF00FC9929 /* Fonts */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		715938562C9413EF00FC9929 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				715938522C9413EF00FC9929 /* Mon3Anonta1.ttf */,
+				715938532C9413EF00FC9929 /* MUA_Office_adobe.ttf */,
+				715938542C9413EF00FC9929 /* Pyidaungsu-1.7_Bold.ttf */,
+				715938552C9413EF00FC9929 /* Pyidaungsu-1.7_Regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -131,8 +178,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				715938582C9413EF00FC9929 /* MUA_Office_adobe.ttf in Resources */,
 				715938442C940ECD00FC9929 /* Preview Assets.xcassets in Resources */,
 				715938412C940ECD00FC9929 /* Assets.xcassets in Resources */,
+				7159385C2C94142E00FC9929 /* dictionary.json in Resources */,
+				715938592C9413EF00FC9929 /* Pyidaungsu-1.7_Bold.ttf in Resources */,
+				715938572C9413EF00FC9929 /* Mon3Anonta1.ttf in Resources */,
+				7159385A2C9413EF00FC9929 /* Pyidaungsu-1.7_Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
