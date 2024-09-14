@@ -13,32 +13,49 @@ struct SearchView: View {
     @FocusState private var isSearching: Bool
     @State private var activeTab: Tab = .all
     @State private var words: [MonDic] = []
+    @State private var isLoading: Bool = true
     @Environment(\.colorScheme) private var scheme
     @Environment(\.managedObjectContext) private var viewContext
     @Namespace private var animation
     
     var body: some View {
-        ScrollView(.vertical) {
-            LazyVStack(spacing: 15) {
-                ContentView()
-            }
-            .onChange(of: searchText) {
-                fetchDataInBackground(query: searchText) { fetchedWords in
-                    self.words = fetchedWords // Update the state variable on the main thread
+        NavigationStack{
+            ScrollView(.vertical) {
+                LazyVStack(spacing: 0) {
+                    if isLoading {
+                        ProgressView("Loading...")
+                    } else {
+                        DictionaryView()
+//                        switch activeTab {
+//                        case .all:
+//                            DictionaryView()
+//                        case .personal:
+//                            RecentView()
+//                        case .office:
+//                            FavoriteView()
+//                        }
+                    }
                 }
+                .onChange(of: searchText) {
+                    fetchDataInBackground(query: searchText) { fetchedWords in
+                        self.words = fetchedWords // Update the state variable on the main thread
+                    }
+                }
+                .onAppear {
+                    loadDataIfNeeded(context: viewContext)
+                    fetchInitialData()
+                }
+                .navigationBarHidden(true)
+                .safeAreaPadding(15)
+                .safeAreaInset(edge: .top, spacing: 0) {
+                    ExpandableNavigationBar()
+                }
+                .animation(.snappy(duration: 0.3, extraBounce: 0), value: isSearching)
             }
-            .onAppear {
-                loadDataIfNeeded(context: viewContext)
-            }
-            .safeAreaPadding(15)
-            .safeAreaInset(edge: .top, spacing: 0) {
-                ExpandableNavigationBar()
-            }
-            .animation(.snappy(duration: 0.3, extraBounce: 0), value: isSearching)
+            .scrollTargetBehavior(CustomScrollTargetBehavious())
+            .background(.gray.opacity(0.15))
+            .contentMargins(.top, 190, for: .scrollIndicators)
         }
-        .scrollTargetBehavior(CustomScrollTargetBehavious())
-        .background(.gray.opacity(0.15))
-        .contentMargins(.top, 190, for: .scrollIndicators)
     }
     
     /// Expandable Navigation Bar
@@ -89,7 +106,7 @@ struct SearchView: View {
                 }
                 
                 // Custom Segmented Picker
-                ScrollView(.horizontal) {
+                ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 12) {
                         ForEach(Tab.allCases, id: \.rawValue) { tab in
                             Button(action: {
@@ -116,7 +133,10 @@ struct SearchView: View {
                             .buttonStyle(.plain)
                         }
                     }
+                    .padding(.horizontal)
                 }
+                .padding(.vertical, 10)
+                
                 
             }
             .padding(.top, 25)
@@ -129,23 +149,38 @@ struct SearchView: View {
         .padding(.bottom, isSearching ? -65 : 0)
     }
     
-    /// Dummy Messages View
+    /// Dictionary View
     @ViewBuilder
-    func DummyMessagesView() -> some View {
+    func DictionaryView() -> some View {
+        if words.isEmpty {
+            Text("No words found")
+                .foregroundColor(.secondary)
+                .padding()
+                .frame(maxWidth: .infinity, alignment: .leading)
+        } else {
             ForEach(words) { item in
-                HStack(spacing: 12) {
-                VStack(alignment: .leading, spacing: 6, content: {
-                    Text(highlightedText(for: item.english ?? ""))
-                        .font(.headline)
-                        .frame(width: 140, height: 25)
-                    Text(highlightedText(for: item.mon ?? ""))
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                        .frame(width: .infinity, height: .infinity)
-                })
+                NavigationLink(destination: DetailView(word: item)) {
+                    HStack(alignment: .top){
+                        VStack(alignment: .leading, spacing: 5) {
+                            Text(highlightedText(for: item.english ?? ""))
+                                .font(.custom("Mon3Anonta1", size: 18))
+                                .fontWeight(.heavy)
+                            
+                            Text(highlightedText(for: item.mon ?? ""))
+                                .font(.custom("Pyidaungsu", size: 16))
+                                .foregroundColor(.secondary)
+                                .lineLimit(3)
+                            
+                        }
+                        .padding(.vertical, 12) // Increase vertical padding
+                        .padding(.horizontal, 15) // Add horizontal padding
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                    }
+                }
+                .buttonStyle(PlainButtonStyle())
+                Divider()
             }
-            .foregroundStyle(.gray.opacity(0.25))
-            .padding(.horizontal, 15)
         }
     }
     
@@ -159,6 +194,15 @@ struct SearchView: View {
         }
         
         return attributedString
+    }
+    
+    private func fetchInitialData() {
+        isLoading = true
+        fetchDataInBackground(query: "") { fetchedWords in
+            self.words = fetchedWords
+            self.isLoading = false
+            print("Initial fetch complete. Loaded \(fetchedWords.count) words.")
+        }
     }
     
     // Fetch data in the background using a background context with whole-word matching

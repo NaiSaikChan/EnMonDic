@@ -10,52 +10,50 @@ import CoreData
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
-
+    
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \MonDic.english, ascending: true)],
         animation: .default)
     private var items: FetchedResults<MonDic>
-
+    
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink(destination: DetailView(word: item)) {
-                        VStack(alignment: .leading){
-                            Text(item.english ?? "")
-                                .font(.custom("Mon3Anonta1", size: 20))
-                                .fontWeight(.bold)
-                            Text(item.mon ?? "")
-                                .font(.custom("Pyidaungsu", size: 16))
-                                .foregroundStyle(.secondary)
-                                .lineLimit(3)
-                        }
-                        .padding(.horizontal, 5)
+        List {
+            ForEach(items) { item in
+                NavigationLink(destination: DetailView(word: item)) {
+                    VStack(alignment: .leading){
+                        Text(item.english ?? "")
+                            .font(.custom("Mon3Anonta1", size: 20))
+                            .fontWeight(.bold)
+                        Text(item.mon ?? "")
+                            .font(.custom("Pyidaungsu", size: 16))
+                            .foregroundStyle(.secondary)
+                            .lineLimit(3)
                     }
+                    .padding(.horizontal, 5)
                 }
-                .onDelete(perform: deleteItems)
             }
-            .onAppear {
-                loadDataIfNeeded(context: viewContext)
+            .onDelete(perform: deleteItems)
+        }
+        .onAppear {
+            loadDataIfNeeded(context: viewContext)
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                EditButton()
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
+            ToolbarItem {
+                Button(action: addItem) {
+                    Label("Add Item", systemImage: "plus")
                 }
             }
         }
     }
-
+    
     private func addItem() {
         withAnimation {
             let newItem = MonDic(context: viewContext)
             newItem.english = "love"
-
+            
             do {
                 try viewContext.save()
             } catch {
@@ -66,11 +64,11 @@ struct ContentView: View {
             }
         }
     }
-
+    
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             offsets.map { items[$0] }.forEach(viewContext.delete)
-
+            
             do {
                 try viewContext.save()
             } catch {
