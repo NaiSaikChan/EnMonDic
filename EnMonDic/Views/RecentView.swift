@@ -10,49 +10,59 @@ import CoreData
 
 struct RecentView: View {
     @Environment(\.managedObjectContext) private var viewContext
-        
-        // Fetch Request to get words sorted by lastViewe date
-        @FetchRequest(
-            sortDescriptors: [NSSortDescriptor(keyPath: \MonDic.lastViewed, ascending: true)],
-            predicate: NSPredicate(format: "lastViewed != nil"),
-            animation: .default
-        ) private var words: FetchedResults<MonDic>
-        
-        var body: some View {
-            NavigationStack {
-                List {
-                    ForEach(words){ word in
-                    VStack(alignment: .leading) {
-                        Text(word.english ?? "")
-                            .font(.custom("Pyidaungsu", size: 20))
-                        
-                        Text(word.mon ?? "")
-                            .font(.custom("Pyidaungsu", size: 16))
-                            .foregroundColor(.secondary)
+    
+    // Fetch Request to get words sorted by lastViewe date
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \MonDic.lastViewed, ascending: true)],
+        predicate: NSPredicate(format: "lastViewed != nil"),
+        animation: .default
+    ) private var words: FetchedResults<MonDic>
+    
+    var body: some View {
+        NavigationStack {
+            ForEach(words) { item in
+                NavigationLink(destination: DetailView(word: item)) {
+                    HStack(alignment: .top){
+                        VStack(alignment: .leading, spacing: 5) {
+                            Text(item.english ?? "")
+                                .font(.custom("Mon3Anonta1", size: 18))
+                                .fontWeight(.heavy)
+                            
+                            Text(item.mon ?? "")
+                                .font(.custom("Pyidaungsu", size: 16))
+                                .foregroundColor(.secondary)
+                                .lineLimit(3)
+                            
+                        }
+                        .padding(.vertical, 12) // Increase vertical padding
+                        .padding(.horizontal, 15) // Add horizontal padding
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     }
-                    .padding(.vertical, 5)
                 }
-                .onDelete(perform: deleteWords(at:))
-                }
-                .navigationTitle("Recent")
-                .toolbar {
-                    EditButton()
-                }
+                .buttonStyle(PlainButtonStyle())
+                Divider()
             }
+            .onDelete(perform: deleteItems)
+            .navigationBarHidden(true)
         }
-        
-        private func deleteWords(at offsets: IndexSet) {
+    }
+    
+    private func deleteItems(offsets: IndexSet) {
+        withAnimation {
             offsets.map { words[$0] }.forEach(viewContext.delete)
+            
             do {
                 try viewContext.save()
             } catch {
-                print("Failed to delete words: \(error)")
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
     }
+}
 
-    struct HistoryView_Previews: PreviewProvider {
-        static var previews: some View {
-            RecentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-        }
+struct RecentView_Previews: PreviewProvider {
+    static var previews: some View {
+        RecentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
+}

@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7100023D2C95590300BF00C6 /* RecentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7100023C2C95590300BF00C6 /* RecentView.swift */; };
-		7100023F2C95591B00BF00C6 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7100023E2C95591B00BF00C6 /* FavoriteView.swift */; };
 		7159383D2C940ECC00FC9929 /* EnMonDicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7159383C2C940ECC00FC9929 /* EnMonDicApp.swift */; };
 		7159383F2C940ECC00FC9929 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7159383E2C940ECC00FC9929 /* ContentView.swift */; };
 		715938412C940ECD00FC9929 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 715938402C940ECD00FC9929 /* Assets.xcassets */; };
@@ -22,13 +20,10 @@
 		7159385C2C94142E00FC9929 /* dictionary.json in Resources */ = {isa = PBXBuildFile; fileRef = 7159385B2C94142E00FC9929 /* dictionary.json */; };
 		7159385E2C941F9900FC9929 /* DataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7159385D2C941F9900FC9929 /* DataLoader.swift */; };
 		715938602C94236D00FC9929 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7159385F2C94236D00FC9929 /* SearchView.swift */; };
-		715938622C942BF300FC9929 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715938612C942BF300FC9929 /* Tab.swift */; };
 		719B8F492C949FF20080CEBB /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719B8F482C949FF20080CEBB /* DetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7100023C2C95590300BF00C6 /* RecentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentView.swift; sourceTree = "<group>"; };
-		7100023E2C95591B00BF00C6 /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
 		715938392C940ECC00FC9929 /* EnMonDic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EnMonDic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7159383C2C940ECC00FC9929 /* EnMonDicApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnMonDicApp.swift; sourceTree = "<group>"; };
 		7159383E2C940ECC00FC9929 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -43,7 +38,6 @@
 		7159385B2C94142E00FC9929 /* dictionary.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dictionary.json; sourceTree = "<group>"; };
 		7159385D2C941F9900FC9929 /* DataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoader.swift; sourceTree = "<group>"; };
 		7159385F2C94236D00FC9929 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
-		715938612C942BF300FC9929 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		719B8F482C949FF20080CEBB /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		719B8F4A2C94A2E30080CEBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -101,7 +95,6 @@
 			isa = PBXGroup;
 			children = (
 				715938452C940ECD00FC9929 /* Persistence.swift */,
-				715938612C942BF300FC9929 /* Tab.swift */,
 				715938472C940ECD00FC9929 /* EnMonDic.xcdatamodeld */,
 				7159385D2C941F9900FC9929 /* DataLoader.swift */,
 			);
@@ -113,8 +106,6 @@
 			children = (
 				7159383E2C940ECC00FC9929 /* ContentView.swift */,
 				7159385F2C94236D00FC9929 /* SearchView.swift */,
-				7100023E2C95591B00BF00C6 /* FavoriteView.swift */,
-				7100023C2C95590300BF00C6 /* RecentView.swift */,
 				719B8F482C949FF20080CEBB /* DetailView.swift */,
 			);
 			path = Views;
@@ -222,9 +213,6 @@
 				715938492C940ECD00FC9929 /* EnMonDic.xcdatamodeld in Sources */,
 				715938602C94236D00FC9929 /* SearchView.swift in Sources */,
 				7159383D2C940ECC00FC9929 /* EnMonDicApp.swift in Sources */,
-				7100023D2C95590300BF00C6 /* RecentView.swift in Sources */,
-				7100023F2C95591B00BF00C6 /* FavoriteView.swift in Sources */,
-				715938622C942BF300FC9929 /* Tab.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,7 +11,6 @@ import CoreData
 struct SearchView: View {
     @State private var searchText: String = ""
     @FocusState private var isSearching: Bool
-    @State private var activeTab: Tab = .all
     @State private var words: [MonDic] = []
     @State private var isLoading: Bool = true
     @Environment(\.colorScheme) private var scheme
@@ -24,16 +23,9 @@ struct SearchView: View {
                 LazyVStack(spacing: 0) {
                     if isLoading {
                         ProgressView("Loading...")
+                        
                     } else {
                         DictionaryView()
-//                        switch activeTab {
-//                        case .all:
-//                            DictionaryView()
-//                        case .personal:
-//                            RecentView()
-//                        case .office:
-//                            FavoriteView()
-//                        }
                     }
                 }
                 .onChange(of: searchText) {
@@ -84,6 +76,7 @@ struct SearchView: View {
                     if isSearching {
                         Button(action: {
                             isSearching = false
+                            searchText = ""
                         }, label: {
                             Image(systemName: "xmark")
                                 .font(.title3)
@@ -100,51 +93,16 @@ struct SearchView: View {
                     RoundedRectangle(cornerRadius: 25 - (progress * 25))
                         .fill(.background)
                         .shadow(color: .gray.opacity(0.25), radius: 5, x: 0, y: 5)
-                        .padding(.top, -progress * 190)
-                        .padding(.bottom, -progress * 65)
+                        .padding(.top, -progress * 130)
                         .padding(.horizontal, -progress * 15)
                 }
-                
-                // Custom Segmented Picker
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 12) {
-                        ForEach(Tab.allCases, id: \.rawValue) { tab in
-                            Button(action: {
-                                withAnimation(.snappy) {
-                                    activeTab = tab
-                                }
-                            }) {
-                                Text(tab.rawValue)
-                                    .font(.callout)
-                                    .foregroundStyle(activeTab == tab ? (scheme == .dark ? .black : .white) : Color.primary)
-                                    .padding(.vertical, 8)
-                                    .padding(.horizontal, 15)
-                                    .background {
-                                        if activeTab == tab {
-                                            Capsule()
-                                                .fill(Color.primary)
-                                                .matchedGeometryEffect(id: "ACTIVETAB", in: animation)
-                                        } else {
-                                            Capsule()
-                                                .fill(.background)
-                                        }
-                                    }
-                            }
-                            .buttonStyle(.plain)
-                        }
-                    }
-                    .padding(.horizontal)
-                }
-                .padding(.vertical, 10)
-                
-                
             }
             .padding(.top, 25)
             .padding(.horizontal, 15)
             .offset(y: minY < 0 || isSearching ? -minY : 0)
             .offset(y: -progress * 65)
         }
-        .frame(height: 190)
+        .frame(height: 130)
         .padding(.bottom, 10)
         .padding(.bottom, isSearching ? -65 : 0)
     }
@@ -175,7 +133,6 @@ struct SearchView: View {
                         .padding(.vertical, 12) // Increase vertical padding
                         .padding(.horizontal, 15) // Add horizontal padding
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        
                     }
                 }
                 .buttonStyle(PlainButtonStyle())
@@ -247,10 +204,5 @@ struct CustomScrollTargetBehavious: ScrollTargetBehavior {
 }
 
 #Preview {
-    SearchView()
+    SearchView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
 }
-
-
-
-
-
