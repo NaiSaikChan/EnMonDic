@@ -171,7 +171,7 @@ struct SearchView: View {
             
             if !query.isEmpty {
                 // Whole-word matching with exact match
-                fetchRequest.predicate = NSPredicate(format: "english CONTAINS[cd] %@ OR mon == [cd] %@", query, query)
+                fetchRequest.predicate = NSPredicate(format: "english BEGINSWITH[cd] %@", query)
             }
             
             fetchRequest.fetchBatchSize = 20 // Adjust batch size to balance performance
@@ -189,6 +189,7 @@ struct SearchView: View {
             }
         }
     }
+    
 }
 
 struct CustomScrollTargetBehavious: ScrollTargetBehavior {

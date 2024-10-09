@@ -13,6 +13,7 @@ struct DetailView: View {
     @ObservedObject var word: MonDic
     @Environment(\.managedObjectContext) private var viewContext
     private let synthesizer = AVSpeechSynthesizer()
+    @State private var showingAddWord = false
     
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
@@ -41,6 +42,18 @@ struct DetailView: View {
             Spacer()
         }
         .padding()
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button(action: {
+                    showingAddWord = true
+                }) {
+                    Label("Add Word", systemImage: "plus.app.fill")
+                }
+            }
+        }
+        .sheet(isPresented: $showingAddWord) {
+            AddWordView()
+        }
     }
     
     private func pronounceWord(_ text: String, language: String) {

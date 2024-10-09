@@ -21,6 +21,7 @@
 		7159385E2C941F9900FC9929 /* DataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7159385D2C941F9900FC9929 /* DataLoader.swift */; };
 		715938602C94236D00FC9929 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7159385F2C94236D00FC9929 /* SearchView.swift */; };
 		719B8F492C949FF20080CEBB /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719B8F482C949FF20080CEBB /* DetailView.swift */; };
+		71F3D2B62C9889C300BCACBC /* AddWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F3D2B52C9889C300BCACBC /* AddWordView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		7159385F2C94236D00FC9929 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		719B8F482C949FF20080CEBB /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		719B8F4A2C94A2E30080CEBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		71F3D2B52C9889C300BCACBC /* AddWordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddWordView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 				7159383E2C940ECC00FC9929 /* ContentView.swift */,
 				7159385F2C94236D00FC9929 /* SearchView.swift */,
 				719B8F482C949FF20080CEBB /* DetailView.swift */,
+				71F3D2B52C9889C300BCACBC /* AddWordView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 				719B8F492C949FF20080CEBB /* DetailView.swift in Sources */,
 				715938462C940ECD00FC9929 /* Persistence.swift in Sources */,
 				7159383F2C940ECC00FC9929 /* ContentView.swift in Sources */,
+				71F3D2B62C9889C300BCACBC /* AddWordView.swift in Sources */,
 				715938492C940ECD00FC9929 /* EnMonDic.xcdatamodeld in Sources */,
 				715938602C94236D00FC9929 /* SearchView.swift in Sources */,
 				7159383D2C940ECC00FC9929 /* EnMonDicApp.swift in Sources */,
@@ -350,11 +354,14 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EnMonDic/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "MEM Dictionary";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -362,6 +369,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.saikchan.EnMonDic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -380,11 +390,14 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EnMonDic/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "MEM Dictionary";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -392,6 +405,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.saikchan.EnMonDic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
